@@ -17,6 +17,10 @@ Appet es un proyecto basado en la necesidad de ayudar a millones de mascotas que
 * Generar incentivos para adoptar mascotas.
 * Crear alianzas con multiples empresas para la mantencion del servicio proporcionado.
 
+### Diagrama
+
+![DiagramaIETIproyecto](https://user-images.githubusercontent.com/47042582/92338041-2cb22880-f073-11ea-9ca9-a32575ffbd03.png)
+
 ### Modelo de negocio
 
 

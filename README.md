@@ -23,6 +23,7 @@ Appet es un proyecto basado en la necesidad de ayudar a millones de mascotas que
 
 ### Modelo de negocio
 
+![Canvas](https://user-images.githubusercontent.com/47042582/92796296-b06f5c00-f376-11ea-9756-79d62ddf8921.jpeg)
 
 
 ### Control de flujo de trabajo

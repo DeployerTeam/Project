@@ -5,6 +5,9 @@ import edu.eci.ieti.petstore.entities.User;
 import edu.eci.ieti.petstore.repository.UserRepository;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -13,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private static String APIKEY = "";
     private static String MERCHANTID = "";
@@ -58,5 +61,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
+    }
 }

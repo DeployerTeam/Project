@@ -9,17 +9,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private static String APIKEY = "";
     private static String MERCHANTID = "";
+    private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     UserRepository userRepository;
@@ -62,7 +65,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findById(email);
 
+        if(user == null) {
+            logger.error("Error en el login: No existe el usuario '"+email+"' en el sistema!");
+            throw new UsernameNotFoundException("Error en el login: No existe el usuario '"+email+"' en el sistema!");
+        }
+
+        return UserDetailsImpl.build(user);
     }
 }

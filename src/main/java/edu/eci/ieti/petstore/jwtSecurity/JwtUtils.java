@@ -14,10 +14,10 @@ import io.jsonwebtoken.*;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${offerbuy.arsw.jwtSecret}")
+    @Value("${appet.ieti.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${offerbuy.arsw.jwtExpirationMs}")
+    @Value("${appet.ieti.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {

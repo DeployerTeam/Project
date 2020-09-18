@@ -6,6 +6,7 @@ import edu.eci.ieti.petstore.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.swing.text.html.Option;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -21,8 +22,12 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
     }
 
-    public static UserDetailsImpl build(Optional<User> usuario){
-        return null;
+    public static UserDetailsImpl build(User usuario, Proveedor proveedor){
+        if(usuario != null) {
+            return new UserDetailsImpl(usuario.getEmail(),usuario.getPassword());
+        }else if(proveedor != null){
+            return new UserDetailsImpl(proveedor.getEmail(),proveedor.getPassword());
+        }
     }
 
     @Override

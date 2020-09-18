@@ -1,5 +1,7 @@
 package edu.eci.ieti.petstore.services;
 
+import org.springframework.http.ResponseEntity;
+
 public interface AuthService {
-    public Boolean validateAccount(String email, String password);
+    public ResponseEntity<?> validateAccount(String email, String password);
 }

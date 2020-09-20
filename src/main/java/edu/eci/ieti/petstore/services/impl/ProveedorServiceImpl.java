@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProveedorServiceImpl implements ProveedorService, UserDetailsService {
+public class ProveedorServiceImpl implements ProveedorService {
 
     @Autowired
     ProveedorRepository proveedorRepository;
@@ -72,15 +72,4 @@ public class ProveedorServiceImpl implements ProveedorService, UserDetailsServic
         }
     }
 
-    @Override
-    public UserDetailsImpl loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Proveedor> user = proveedorRepository.findById(email);
-
-        if(user == null) {
-            logger.error("Error en el login: No existe el usuario '"+email+"' en el sistema!");
-            throw new UsernameNotFoundException("Error en el login: No existe el usuario '"+email+"' en el sistema!");
-        }
-
-        return UserDetailsImpl.build(null, user);
-    }
 }

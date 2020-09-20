@@ -6,8 +6,8 @@ import edu.eci.ieti.petstore.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.swing.text.html.Option;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 
 public class UserDetailsImpl implements UserDetails {
@@ -22,12 +22,18 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
     }
 
-    public static UserDetailsImpl build(User usuario, Proveedor proveedor){
-        if(usuario != null) {
-            return new UserDetailsImpl(usuario.getEmail(),usuario.getPassword());
-        }else if(proveedor != null){
-            return new UserDetailsImpl(proveedor.getEmail(),proveedor.getPassword());
+    public static UserDetailsImpl build(Optional<User> usuario, Optional<Proveedor> proveedor){
+        UserDetailsImpl userDetails = null;
+        System.out.println(usuario + " "+ proveedor);
+        if(usuario.isPresent()) {
+            System.out.println("soy usuario");
+            userDetails = new UserDetailsImpl(usuario.get().getEmail(),usuario.get().getPassword());
+        }else if(proveedor.isPresent()){
+            System.out.println("soy proveedor");
+            userDetails = new UserDetailsImpl(proveedor.get().getEmail(),proveedor.get().getPassword());
         }
+        return userDetails;
+
     }
 
     @Override
@@ -63,5 +69,15 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        UserDetailsImpl user = (UserDetailsImpl) o;
+        return Objects.equals(email, user.email);
     }
 }

@@ -1,7 +1,9 @@
 package edu.eci.ieti.petstore.services.impl;
 
 import edu.eci.ieti.petstore.entities.Pago;
+import edu.eci.ieti.petstore.entities.Proveedor;
 import edu.eci.ieti.petstore.entities.User;
+import edu.eci.ieti.petstore.repository.ProveedorRepository;
 import edu.eci.ieti.petstore.repository.UserRepository;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     PasswordEncoder encoder;
+
+    @Autowired
+    ProveedorRepository proveedorRepository;
 
     @Override
     public User create(User user) {
@@ -72,12 +77,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findById(email);
-
-        if(user == null) {
+        Optional<Proveedor> prov = proveedorRepository.findById(email);
+        if(user == null && prov == null) {
             logger.error("Error en el login: No existe el usuario '"+email+"' en el sistema!");
             throw new UsernameNotFoundException("Error en el login: No existe el usuario '"+email+"' en el sistema!");
         }
 
-        return UserDetailsImpl.build(user,null);
+        return UserDetailsImpl.build(user,prov);
     }
 }

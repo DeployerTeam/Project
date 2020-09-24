@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User findUser(String email) {
+        return userRepository.findById(email).get();
+    }
+
+    @Override
     public Pago pay(Pago pago) {
         Calendar calendar = Calendar.getInstance();
         String referenceCode = getMD5(calendar.getCalendarType() + pago.getBuyerEmail() + pago.getBuyerFullName());

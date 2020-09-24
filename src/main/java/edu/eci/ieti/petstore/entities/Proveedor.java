@@ -12,12 +12,6 @@ public class Proveedor {
     private int phone;
     private String nameCompany;
 
-    public Proveedor(String email, String password, int phone, String nameCompany){
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.nameCompany = nameCompany;
-    }
 
     public String getEmail() {
         return email;

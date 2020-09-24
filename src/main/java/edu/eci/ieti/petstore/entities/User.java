@@ -3,6 +3,9 @@ package edu.eci.ieti.petstore.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Document
 public class User {
 
@@ -12,13 +15,10 @@ public class User {
     private String password;
     private String name;
     private int phone;
-    private String role;
+    private List<FormAdopt> requestAdopt = new ArrayList<>();
 
-    public User (String email, String name, String password,  int phone){
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.phone = phone;
+    public void addFormAdopt(FormAdopt formAdopt){
+        requestAdopt.add(formAdopt);
     }
 
     public String getEmail() {
@@ -53,4 +53,11 @@ public class User {
         this.phone = phone;
     }
 
+    public List<FormAdopt> getRequestAdopt() {
+        return requestAdopt;
+    }
+
+    public void setRequestAdopt(List<FormAdopt> requestAdopt) {
+        this.requestAdopt = requestAdopt;
+    }
 }

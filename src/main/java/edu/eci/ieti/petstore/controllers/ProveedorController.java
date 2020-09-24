@@ -40,11 +40,10 @@ public class ProveedorController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createProveedor(@RequestBody ArrayList<String> proveedor){
+    public ResponseEntity<?> createProveedor(@RequestBody Proveedor proveedor){
         ResponseEntity response;
         try{
-            Proveedor newProveedor = new Proveedor(proveedor.get(0), proveedor.get(2), Integer.parseInt(proveedor.get(3)), proveedor.get(4));
-            proveedorService.createProveedor(newProveedor);
+            proveedorService.createProveedor(proveedor);
             response = new ResponseEntity<>(HttpStatus.CREATED);
         }catch(ExceptionServiciosAppet e) {
             e.printStackTrace();

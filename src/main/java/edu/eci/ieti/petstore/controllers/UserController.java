@@ -1,11 +1,13 @@
 package edu.eci.ieti.petstore.controllers;
 
+
+import edu.eci.ieti.petstore.entities.FormAdopt;
 import edu.eci.ieti.petstore.entities.User;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
+
 
 @RestController
 @RequestMapping(value = "/user")
@@ -15,12 +17,16 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/create")
-    public void createUser(@RequestBody ArrayList<String> user){
-        //System.out.println(user.get(0) + " " + user.get(1) + " " +user.get(2) + " " + user.get(3));
-        User newUser = new User(user.get(0), user.get(1), user.get(2), Integer.parseInt(user.get(3)));
-        userService.create(newUser);
+    public void createUser(@RequestBody User user){
+        userService.create(user);
     }
 
-
+    @PostMapping("/addform")
+    public void addForm(@RequestBody FormAdopt form){
+        System.out.println(form);
+        User user = userService.findUser("andres@gmail.com"); //Correo mientras se implementa el poner en adopcion para probar
+        user.addFormAdopt(form);
+        userService.create(user);
+    }
 
 }

@@ -39,7 +39,7 @@ public class ProveedorController {
         return response;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> createProveedor(@RequestBody ArrayList<String> proveedor){
         ResponseEntity response;
         try{

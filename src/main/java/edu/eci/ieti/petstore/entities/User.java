@@ -12,6 +12,7 @@ public class User {
     private String password;
     private String name;
     private int phone;
+    private String role;
 
     public User (String email, String name, String password,  int phone){
         this.email = email;
@@ -51,4 +52,5 @@ public class User {
     public void setPhone(int phone) {
         this.phone = phone;
     }
+
 }

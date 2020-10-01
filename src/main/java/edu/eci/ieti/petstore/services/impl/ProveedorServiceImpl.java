@@ -46,6 +46,7 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Override
     public void createProveedor(Proveedor proveedor) throws ExceptionServiciosAppet {
         if(proveedorRepository.existsById(proveedor.getEmail())) {
+            System.out.println("EL PROVEEDOR YA EXISTE");
             throw new ExceptionServiciosAppet("El proveedor ya existe.");
         }
         proveedor.setPassword(encoder.encode(proveedor.getPassword()));
@@ -53,9 +54,10 @@ public class ProveedorServiceImpl implements ProveedorService {
     }
 
     @Override
-    public void updateProveedor(Proveedor proveedor) throws ExceptionServiciosAppet {
-        Optional<Proveedor> prov = proveedorRepository.findById(proveedor.getEmail());
-        if(prov.isPresent()){
+    public void updateProveedor(String email, Proveedor proveedor) throws ExceptionServiciosAppet {
+        boolean existe = proveedorRepository.existsById(email);
+        if(existe){
+            proveedor.setPassword(encoder.encode(proveedor.getPassword()));
             proveedorRepository.save(proveedor);
         }else{
             throw new ExceptionServiciosAppet("El proveedor no existe.");
@@ -64,8 +66,8 @@ public class ProveedorServiceImpl implements ProveedorService {
 
     @Override
     public void deleteProveedor(String email) throws ExceptionServiciosAppet {
-        Optional<Proveedor> prov = proveedorRepository.findById(email);
-        if(!prov.equals(null)) {
+        boolean existe = proveedorRepository.existsById(email);
+        if(existe) {
             proveedorRepository.deleteById(email);
         }else {
             throw new ExceptionServiciosAppet("No se pudo eliminar el proveedor.");

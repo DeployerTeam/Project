@@ -28,7 +28,7 @@ public class ProveedorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getProveedor(@PathVariable String email){
+    public ResponseEntity<?> getProveedor(@PathVariable("id") String email){
         ResponseEntity response;
         try {
             response = new ResponseEntity<>(proveedorService.getProveedor(email),HttpStatus.ACCEPTED);
@@ -53,9 +53,9 @@ public class ProveedorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProveedor(@RequestBody Proveedor proveedor) throws ExceptionServiciosAppet{
+    public ResponseEntity<?> updateProveedor(@PathVariable("id") String email, @RequestBody Proveedor proveedor) throws ExceptionServiciosAppet{
         try {
-            proveedorService.updateProveedor(proveedor);
+            proveedorService.updateProveedor(email, proveedor);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class ProveedorController {
     }
 
     @DeleteMapping("/proveedor/{id}")
-    public ResponseEntity<?> deleteProveedor(@PathVariable String email) throws ExceptionServiciosAppet{
+    public ResponseEntity<?> deleteProveedor(@PathVariable("id") String email) throws ExceptionServiciosAppet{
         try {
             proveedorService.deleteProveedor(email);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);

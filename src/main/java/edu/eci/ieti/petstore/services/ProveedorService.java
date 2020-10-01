@@ -11,7 +11,7 @@ public interface ProveedorService {
      * @param proveedor provider
      * @throws ExceptionServiciosAppet
      */
-    void updateProveedor(Proveedor proveedor) throws ExceptionServiciosAppet;
+    void updateProveedor(String email, Proveedor proveedor) throws ExceptionServiciosAppet;
 
     /**
      * Get provider in system

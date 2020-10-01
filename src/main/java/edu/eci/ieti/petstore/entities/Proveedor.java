@@ -10,8 +10,8 @@ public class Proveedor {
     private String email;
     private String password;
     private int phone;
-    private String nameCompany;
-
+    private String companyName;
+    private String city;
 
     public String getEmail() {
         return email;
@@ -38,13 +38,29 @@ public class Proveedor {
     }
 
     public String getName() {
-        return nameCompany;
+        return companyName;
     }
 
-    public void setNameCompany(String nameCompany) {
-        this.nameCompany = nameCompany;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
+    public String getCity() {
+        return city;
+    }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
 
+    @Override
+    public String toString() {
+        return "Proveedor{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone=" + phone +
+                ", companyName='" + companyName + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

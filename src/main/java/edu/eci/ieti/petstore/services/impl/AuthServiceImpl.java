@@ -38,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
         String jwt = jwtUtils.generateJwtToken(authentication);
         System.out.println(jwt);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername()));
+        System.out.println((userDetails.getIsSupplier()));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(),userDetails.getIsSupplier()));
     }
 }

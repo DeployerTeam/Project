@@ -1,6 +1,7 @@
 package edu.eci.ieti.petstore.services.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import edu.eci.ieti.petstore.entities.Proveedor;
 import edu.eci.ieti.petstore.entities.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,12 +15,16 @@ public class UserDetailsImpl implements UserDetails {
 
     private String email;
 
+    private Boolean isSupplier;
+
     @JsonIgnore
     private String password;
 
-    public UserDetailsImpl(String email, String password){
+    public UserDetailsImpl(String email, String password, Boolean isSupplier){
         this.email = email;
         this.password = password;
+        this.isSupplier = isSupplier;
+
     }
 
     public static UserDetailsImpl build(Optional<User> usuario, Optional<Proveedor> proveedor){
@@ -27,10 +32,10 @@ public class UserDetailsImpl implements UserDetails {
         System.out.println(usuario + " "+ proveedor);
         if(usuario.isPresent()) {
             System.out.println("soy usuario");
-            userDetails = new UserDetailsImpl(usuario.get().getEmail(),usuario.get().getPassword());
+            userDetails = new UserDetailsImpl(usuario.get().getEmail(),usuario.get().getPassword(),false);
         }else if(proveedor.isPresent()){
             System.out.println("soy proveedor");
-            userDetails = new UserDetailsImpl(proveedor.get().getEmail(),proveedor.get().getPassword());
+            userDetails = new UserDetailsImpl(proveedor.get().getEmail(),proveedor.get().getPassword(),true);
         }
         return userDetails;
 
@@ -49,6 +54,14 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    public Boolean getIsSupplier() {
+        return isSupplier;
+    }
+
+    public void setIsSupplier(Boolean isSupplier) {
+        this.isSupplier = isSupplier;
     }
 
     @Override

@@ -4,10 +4,12 @@ public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private String email;
+    private Boolean isSupplier;
 
-    public JwtResponse(String accessToken, String email) {
+    public JwtResponse(String accessToken, String email, Boolean isSupplier) {
         this.token = accessToken;
         this.email = email;
+        this.isSupplier = isSupplier;
     }
 
     public String getAccessToken() {
@@ -35,4 +37,11 @@ public class JwtResponse {
         this.email = email;
     }
 
+    public Boolean getIsSupplier() {
+        return isSupplier;
+    }
+
+    public void setIsSupplier(Boolean isSupplier) {
+        this.isSupplier = isSupplier;
+    }
 }

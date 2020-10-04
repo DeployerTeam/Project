@@ -13,6 +13,7 @@ public class Pet {
     String image;
     String gender;
     String raza;
+    String edad;
 
     public long getId() {
         return id;
@@ -60,5 +61,13 @@ public class Pet {
 
     public void setRaza(String raza) {
         this.raza = raza;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
     }
 }

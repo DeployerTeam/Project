@@ -1,10 +1,12 @@
 package edu.eci.ieti.petstore.services.impl;
 
+import edu.eci.ieti.petstore.entities.FormAdopt;
 import edu.eci.ieti.petstore.entities.Pago;
 import edu.eci.ieti.petstore.entities.Proveedor;
 import edu.eci.ieti.petstore.entities.User;
 import edu.eci.ieti.petstore.repository.ProveedorRepository;
 import edu.eci.ieti.petstore.repository.UserRepository;
+import edu.eci.ieti.petstore.services.PetService;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +33,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     UserRepository userRepository;
 
     @Autowired
+    PetService petService;
+
+    @Autowired
     PasswordEncoder encoder;
 
     @Autowired
@@ -50,6 +55,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User findUser(String email) {
         return userRepository.findById(email).get();
+    }
+
+    @Override
+    public void addFormAdopt(FormAdopt formAdopt) {
+        String donorEmail = petService.getDonorPet(Long.parseLong(formAdopt.getIdPet()));
+        User user = findUser(donorEmail); //Correo mientras se implementa el poner en adopcion para probar
+        user.addFormAdopt(formAdopt);
+        create(user);
     }
 
     @Override

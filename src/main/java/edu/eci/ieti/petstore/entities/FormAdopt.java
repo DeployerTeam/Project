@@ -2,6 +2,7 @@ package edu.eci.ieti.petstore.entities;
 
 public class FormAdopt {
 
+    private String idPet;
     private String name;
     private String age;
     private String gender;
@@ -18,7 +19,15 @@ public class FormAdopt {
     private String space;
     private String pets;
     private String financially;
-    
+
+    public String getIdPet() {
+        return idPet;
+    }
+
+    public void setIdPet(String idPet) {
+        this.idPet = idPet;
+    }
+
     public String getName() {
         return name;
     }

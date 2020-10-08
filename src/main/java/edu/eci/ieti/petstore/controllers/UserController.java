@@ -22,10 +22,8 @@ public class UserController {
 
     @PostMapping("/addform")
     public void addForm(@RequestBody FormAdopt form){
-        System.out.println(form);
-        User user = userService.findUser("andres@gmail.com"); //Correo mientras se implementa el poner en adopcion para probar
-        user.addFormAdopt(form);
-        userService.create(user);
+        System.out.println(form.getIdPet());
+        userService.addFormAdopt(form);
     }
 
 }

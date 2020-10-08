@@ -1,5 +1,6 @@
 package edu.eci.ieti.petstore.services;
 
+import edu.eci.ieti.petstore.entities.FormAdopt;
 import edu.eci.ieti.petstore.entities.Pago;
 import edu.eci.ieti.petstore.entities.User;
 
@@ -25,6 +26,12 @@ public interface UserService {
      * @return allow obtain user for email
      */
     User findUser(String email);
+
+    /**
+     * add request for adopt to user donor
+     * @param formAdopt form to adopt
+     */
+    void addFormAdopt(FormAdopt formAdopt);
 
     Pago pay(Pago pago);
 

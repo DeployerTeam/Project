@@ -18,6 +18,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = findUser(donorEmail); //Correo mientras se implementa el poner en adopcion para probar
         user.addFormAdopt(formAdopt);
         create(user);
+    }
+
+    @Override
+    public List<FormAdopt> getForms(String email) {
+        return findUser(email).getRequestAdopt();
     }
 
     @Override

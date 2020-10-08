@@ -7,6 +7,8 @@ import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/user")
@@ -24,6 +26,11 @@ public class UserController {
     public void addForm(@RequestBody FormAdopt form){
         System.out.println(form.getIdPet());
         userService.addFormAdopt(form);
+    }
+
+    @GetMapping("/getforms")
+    public List<FormAdopt> getForms(@RequestParam(value = "id") String id){
+        return userService.getForms(id);
     }
 
 }

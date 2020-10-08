@@ -4,6 +4,8 @@ import edu.eci.ieti.petstore.entities.FormAdopt;
 import edu.eci.ieti.petstore.entities.Pago;
 import edu.eci.ieti.petstore.entities.User;
 
+import java.util.List;
+
 public interface UserService {
 
     /**
@@ -32,6 +34,8 @@ public interface UserService {
      * @param formAdopt form to adopt
      */
     void addFormAdopt(FormAdopt formAdopt);
+
+    List<FormAdopt> getForms(String email);
 
     Pago pay(Pago pago);
 

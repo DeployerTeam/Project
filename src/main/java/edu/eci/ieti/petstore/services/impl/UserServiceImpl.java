@@ -1,10 +1,12 @@
 package edu.eci.ieti.petstore.services.impl;
 
+import edu.eci.ieti.petstore.entities.FormAdopt;
 import edu.eci.ieti.petstore.entities.Pago;
 import edu.eci.ieti.petstore.entities.Proveedor;
 import edu.eci.ieti.petstore.entities.User;
 import edu.eci.ieti.petstore.repository.ProveedorRepository;
 import edu.eci.ieti.petstore.repository.UserRepository;
+import edu.eci.ieti.petstore.services.PetService;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +18,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +32,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PetService petService;
 
     @Autowired
     PasswordEncoder encoder;
@@ -50,6 +56,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User findUser(String email) {
         return userRepository.findById(email).get();
+    }
+
+    @Override
+    public void addFormAdopt(FormAdopt formAdopt) {
+        String donorEmail = petService.getDonorPet(Long.parseLong(formAdopt.getIdPet()));
+        User user = findUser(donorEmail); //Correo mientras se implementa el poner en adopcion para probar
+        user.addFormAdopt(formAdopt);
+        create(user);
+    }
+
+    @Override
+    public List<FormAdopt> getForms(String email) {
+        return findUser(email).getRequestAdopt();
     }
 
     @Override

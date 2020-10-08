@@ -9,4 +9,6 @@ public interface PetService {
     Pet addPet(Pet pet);
 
     List<Pet> getAll();
+
+    String getDonorPet(Long id);
 }

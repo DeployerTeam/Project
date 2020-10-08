@@ -44,7 +44,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User create(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
+        if(user.getPassword().length() < 20) {
+            user.setPassword(encoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 
@@ -62,6 +64,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void addFormAdopt(FormAdopt formAdopt) {
         String donorEmail = petService.getDonorPet(Long.parseLong(formAdopt.getIdPet()));
         User user = findUser(donorEmail); //Correo mientras se implementa el poner en adopcion para probar
+
         user.addFormAdopt(formAdopt);
         create(user);
     }

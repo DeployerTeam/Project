@@ -1,9 +1,6 @@
 package edu.eci.ieti.petstore.services.impl;
 
-import edu.eci.ieti.petstore.entities.FormAdopt;
-import edu.eci.ieti.petstore.entities.Pago;
-import edu.eci.ieti.petstore.entities.Proveedor;
-import edu.eci.ieti.petstore.entities.User;
+import edu.eci.ieti.petstore.entities.*;
 import edu.eci.ieti.petstore.repository.ProveedorRepository;
 import edu.eci.ieti.petstore.repository.UserRepository;
 import edu.eci.ieti.petstore.services.PetService;
@@ -82,7 +79,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         pago.setSignature(getMD5(APIKEY + "~" + MERCHANTID + "~" + referenceCode + "~" + pago.getAmount() + "~" + pago.getCurrency()));
         return pago;
     }
-
 
     private static String getMD5(String input) {
         try {

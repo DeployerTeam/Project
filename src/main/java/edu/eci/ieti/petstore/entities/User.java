@@ -11,7 +11,6 @@ public class User {
 
     @Id
     private String email;
-
     private String password;
     private String name;
     private int phone;
@@ -60,4 +59,5 @@ public class User {
     public void setRequestAdopt(List<FormAdopt> requestAdopt) {
         this.requestAdopt = requestAdopt;
     }
+
 }

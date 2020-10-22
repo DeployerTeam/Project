@@ -2,10 +2,11 @@ package edu.eci.ieti.petstore.services.impl;
 
 import edu.eci.ieti.petstore.entities.FormAdopt;
 import edu.eci.ieti.petstore.entities.Pago;
-import edu.eci.ieti.petstore.entities.Proveedor;
 import edu.eci.ieti.petstore.entities.User;
-import edu.eci.ieti.petstore.repository.ProveedorRepository;
+import edu.eci.ieti.petstore.entities.Proveedor;
 import edu.eci.ieti.petstore.repository.UserRepository;
+import edu.eci.ieti.petstore.repository.ProveedorRepository;
+import edu.eci.ieti.petstore.services.ExceptionServiciosAppet;
 import edu.eci.ieti.petstore.services.PetService;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         pago.setReferenceCode(referenceCode);
         pago.setSignature(getMD5(APIKEY + "~" + MERCHANTID + "~" + referenceCode + "~" + pago.getAmount() + "~" + pago.getCurrency()));
         return pago;
+    }
+
+    @Override
+    public User getUser(String email) throws ExceptionServiciosAppet {
+        Optional<User> user = userRepository.findById(email);
+        if(user.isPresent()){
+            return user.get();
+        }else {
+            throw new ExceptionServiciosAppet("No se ha encontrado el usuario.");
+        }
     }
 
 

@@ -39,4 +39,12 @@ public interface UserService {
 
     Pago pay(Pago pago);
 
+    /**
+     * Get user in system
+     * @param email id user
+     * @return user with id
+     * @throws ExceptionServiciosAppet
+     */
+    User getUser(String email) throws ExceptionServiciosAppet;
+
 }

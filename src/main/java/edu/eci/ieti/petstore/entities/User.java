@@ -11,14 +11,45 @@ public class User {
 
     @Id
     private String email;
-
+    private int age;
+    private String gender;
     private String password;
     private String name;
     private int phone;
+    private String city;
+    private String address;
     private List<FormAdopt> requestAdopt = new ArrayList<>();
 
     public void addFormAdopt(FormAdopt formAdopt){
         requestAdopt.add(formAdopt);
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) { this.address = address; }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) { this.city = city; }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getEmail() {

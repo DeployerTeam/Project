@@ -14,6 +14,7 @@ public class PetServiceImpl implements PetService {
     @Autowired
     PetRepository petRepository;
 
+
     @Override
     public Pet addPet(Pet pet) {
         int id = getAll().size() + 1;
@@ -29,5 +30,10 @@ public class PetServiceImpl implements PetService {
     @Override
     public String getDonorPet(Long id) {
         return petRepository.getPetById(id).getUserDonor();
+    }
+
+    @Override
+    public void removePetById(Long id) {
+        petRepository.removePetBy(id);
     }
 }

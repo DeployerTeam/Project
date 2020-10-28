@@ -20,6 +20,15 @@ public class User {
         requestAdopt.add(formAdopt);
     }
 
+    public void removeRequestAdopt(String email){
+        for(FormAdopt formAdopt: requestAdopt){
+            if(formAdopt.getEmail().equals(email)){
+                requestAdopt.remove(formAdopt);
+                break;
+            }
+        }
+    }
+
     public String getEmail() {
         return email;
     }

@@ -11,4 +11,7 @@ public interface PetService {
     List<Pet> getAll();
 
     String getDonorPet(Long id);
+
+    void removePetById(Long id);
+
 }

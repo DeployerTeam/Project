@@ -33,9 +33,8 @@ public class PetController {
 
     @DeleteMapping("/delete")
     public void approveRequest(@RequestParam (value = "petId") String petId, @RequestParam(value="email") String email){
-
+        System.out.println(petId);
         String emailDonor = petService.getDonorPet(Long.parseLong(petId));
-        System.out.println(email +  " " + emailDonor);
         User user = userService.findUser(emailDonor);
         user.removeRequestAdopt(email);
         userService.create(user);

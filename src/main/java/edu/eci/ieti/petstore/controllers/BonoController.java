@@ -28,7 +28,7 @@ public class BonoController {
         }
     }
 
-    @GetMapping("/getmybonos")
+    @GetMapping("/mybonos")
     public ResponseEntity getMyBonos(@RequestParam (value = "user") String user){
         try{
             List<Bono> response = bonoService.findBonoByOwnerEmail(user);
@@ -36,6 +36,16 @@ public class BonoController {
 
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/redeem")
+    public ResponseEntity<?> redeem(@RequestBody List<String> bono){
+        try{
+            boolean accepted = bonoService.redeem(bono.get(0), bono.get(1));
+            return new ResponseEntity<>(accepted,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

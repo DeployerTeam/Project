@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -50,6 +49,20 @@ public class BonoServiceImpl implements BonoService {
     @Override
     public List<Bono> findBonoByOwnerEmail(String email) {
         return bonoRepository.findByOwnerEmail(email);
+    }
+
+    @Override
+    public boolean redeem(String userEmail, String code) {
+        boolean accepted = false;
+        List<Bono> bonos = bonoRepository.findByOwnerEmail(userEmail);
+        for(Bono bono : bonos){
+            if(bono.getCode().equals(code) && bono.getRedeemed() == false){
+                accepted = true;
+                bono.setRedeemed(true);
+                save(bono);
+            }
+        }
+        return accepted;
     }
 
 

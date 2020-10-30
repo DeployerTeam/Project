@@ -36,8 +36,12 @@ public interface UserService {
      */
     void addFormAdopt(FormAdopt formAdopt);
 
+    void removeRequestAddopt(String email, String petId);
+
     List<FormAdopt> getForms(String email);
 
     Pago pay(Pago pago);
+
+
 
 }

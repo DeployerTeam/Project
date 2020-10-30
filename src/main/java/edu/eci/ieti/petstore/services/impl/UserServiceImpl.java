@@ -67,6 +67,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public void removeRequestAddopt(String email, String petId) {
+        String emailDonor = petService.getDonorPet(Long.parseLong(petId));
+        User user = findUser(emailDonor);
+        user.removeRequestAdopt(email);
+        create(user);
+    }
+
+    @Override
     public List<FormAdopt> getForms(String email) {
         return findUser(email).getRequestAdopt();
     }

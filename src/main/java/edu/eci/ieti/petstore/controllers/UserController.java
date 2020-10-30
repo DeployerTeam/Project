@@ -28,9 +28,16 @@ public class UserController {
         userService.addFormAdopt(form);
     }
 
+    @PostMapping("/deleterequest")
+    public void removeRequest(@RequestParam(value ="email") String email,@RequestParam(value="petId") String petId){
+        System.out.println(email +  " "+ petId);
+        userService.removeRequestAddopt(email,petId);
+    }
+
     @GetMapping("/getforms")
     public List<FormAdopt> getForms(@RequestParam(value = "id") String id){
         return userService.getForms(id);
     }
+
 
 }

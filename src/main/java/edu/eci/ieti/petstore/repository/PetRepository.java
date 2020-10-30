@@ -9,4 +9,7 @@ public interface PetRepository extends MongoRepository<Pet, Long> {
 
     Pet getPetById(Long id);
 
+    void removePetById(Long id);
+
+
 }

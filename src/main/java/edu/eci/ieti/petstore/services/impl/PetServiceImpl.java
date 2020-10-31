@@ -17,7 +17,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet addPet(Pet pet) {
-        int id = getAll().size() + 1;
+        List<Pet> pets = getAll();
+        int id = (int)(pets.get(pets.size()-1).getId()) + 1;
         pet.setId(id);
         return petRepository.save(pet);
     }

@@ -3,6 +3,7 @@ package edu.eci.ieti.petstore.services.impl;
 import edu.eci.ieti.petstore.entities.*;
 import edu.eci.ieti.petstore.repository.ProveedorRepository;
 import edu.eci.ieti.petstore.repository.UserRepository;
+import edu.eci.ieti.petstore.services.ExceptionServiciosAppet;
 import edu.eci.ieti.petstore.services.PetService;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     ProveedorRepository proveedorRepository;
 
     @Override
-    public User create(User user) {
-        if(user.getPassword().length() < 20) {
-            user.setPassword(encoder.encode(user.getPassword()));
+    public User create(User user) throws ExceptionServiciosAppet {
+        if(userRepository.existsById(user.getEmail())) {
+            System.out.println("EL USUARIO YA EXISTE");
+            throw new ExceptionServiciosAppet("El usuario ya existe.");
         }
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    @Override
+    public void updateUser(String email, User user) throws ExceptionServiciosAppet {
+        boolean existe = userRepository.existsById(email);
+        if(existe){
+            user.setPassword(encoder.encode(user.getPassword()));
+            userRepository.save(user);
+        }else{
+            throw new ExceptionServiciosAppet("El usuario no existe.");
+        }
     }
 
     @Override
@@ -53,30 +67,35 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findUser(String email) {
-        return userRepository.findById(email).get();
+    public User getUser(String email) throws ExceptionServiciosAppet {
+        Optional<User> user = userRepository.findById(email);
+        if(user.isPresent()){
+            return user.get();
+        }else {
+            throw new ExceptionServiciosAppet("No se ha encontrado el usuario.");
+        }
     }
 
     @Override
-    public void addFormAdopt(FormAdopt formAdopt) {
+    public void addFormAdopt(FormAdopt formAdopt) throws ExceptionServiciosAppet {
         String donorEmail = petService.getDonorPet(Long.parseLong(formAdopt.getIdPet()));
-        User user = findUser(donorEmail); //Correo mientras se implementa el poner en adopcion para probar
+        User user = getUser(donorEmail); //Correo mientras se implementa el poner en adopcion para probar
 
         user.addFormAdopt(formAdopt);
         create(user);
     }
 
     @Override
-    public void removeRequestAddopt(String email, String petId) {
+    public void removeRequestAddopt(String email, String petId) throws ExceptionServiciosAppet {
         String emailDonor = petService.getDonorPet(Long.parseLong(petId));
-        User user = findUser(emailDonor);
+        User user = getUser(emailDonor);
         user.removeRequestAdopt(email);
         create(user);
     }
 
     @Override
-    public List<FormAdopt> getForms(String email) {
-        return findUser(email).getRequestAdopt();
+    public List<FormAdopt> getForms(String email) throws ExceptionServiciosAppet {
+        return getUser(email).getRequestAdopt();
     }
 
     @Override

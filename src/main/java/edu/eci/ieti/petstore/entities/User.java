@@ -14,6 +14,10 @@ public class User {
     private String password;
     private String name;
     private int phone;
+    private int age;
+    private String city;
+    private String address;
+    private String gender;
     private List<FormAdopt> requestAdopt = new ArrayList<>();
 
     public void addFormAdopt(FormAdopt formAdopt){
@@ -29,9 +33,7 @@ public class User {
         }
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
     public void setEmail(String email) {
         this.email = email;
@@ -60,6 +62,22 @@ public class User {
     public void setPhone(int phone) {
         this.phone = phone;
     }
+
+    public int getAge() { return age; }
+
+    public void setAge(int age) { this.age = age; }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
+
+    public String getCity() { return city; }
+
+    public void setCity(String city) { this.city = city; }
+
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) { this.gender = gender; }
 
     public List<FormAdopt> getRequestAdopt() {
         return requestAdopt;

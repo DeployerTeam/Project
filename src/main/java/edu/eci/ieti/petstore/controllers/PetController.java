@@ -3,6 +3,7 @@ package edu.eci.ieti.petstore.controllers;
 
 import edu.eci.ieti.petstore.entities.Pet;
 import edu.eci.ieti.petstore.entities.User;
+import edu.eci.ieti.petstore.services.ExceptionServiciosAppet;
 import edu.eci.ieti.petstore.services.PetService;
 import edu.eci.ieti.petstore.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,10 @@ public class PetController {
     }
 
     @DeleteMapping("/delete")
-    public void approveRequest(@RequestParam (value = "petId") String petId, @RequestParam(value="email") String email){
+    public void approveRequest(@RequestParam (value = "petId") String petId, @RequestParam(value="email") String email) throws ExceptionServiciosAppet {
         System.out.println(petId);
         String emailDonor = petService.getDonorPet(Long.parseLong(petId));
-        User user = userService.findUser(emailDonor);
+        User user = userService.getUser(emailDonor);
         user.removeRequestAdopt(email);
         userService.create(user);
         petService.removePetById(Long.parseLong(petId));

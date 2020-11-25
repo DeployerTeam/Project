@@ -12,6 +12,7 @@ public class Proveedor {
     private int phone;
     private String companyName;
     private String city;
+    private String address;
 
     public String getEmail() {
         return email;
@@ -53,6 +54,10 @@ public class Proveedor {
         this.city = city;
     }
 
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
+
     @Override
     public String toString() {
         return "Proveedor{" +
@@ -61,6 +66,7 @@ public class Proveedor {
                 ", phone=" + phone +
                 ", companyName='" + companyName + '\'' +
                 ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

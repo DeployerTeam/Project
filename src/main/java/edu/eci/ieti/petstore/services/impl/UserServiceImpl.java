@@ -42,11 +42,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User create(User user) throws ExceptionServiciosAppet {
-        if(userRepository.existsById(user.getEmail())) {
-            System.out.println("EL USUARIO YA EXISTE");
-            throw new ExceptionServiciosAppet("El usuario ya existe.");
+        if(user.getPassword().length() < 20) {
+            user.setPassword(encoder.encode(user.getPassword()));
         }
-        user.setPassword(encoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
 
@@ -54,7 +53,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void updateUser(String email, User user) throws ExceptionServiciosAppet {
         boolean existe = userRepository.existsById(email);
         if(existe){
-            user.setPassword(encoder.encode(user.getPassword()));
             userRepository.save(user);
         }else{
             throw new ExceptionServiciosAppet("El usuario no existe.");

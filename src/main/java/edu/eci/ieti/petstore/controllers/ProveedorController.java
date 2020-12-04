@@ -54,6 +54,7 @@ public class ProveedorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProveedor(@PathVariable("id") String email, @RequestBody Proveedor proveedor) throws ExceptionServiciosAppet{
+
         try {
             proveedorService.updateProveedor(email, proveedor);
             return new ResponseEntity<>(HttpStatus.OK);

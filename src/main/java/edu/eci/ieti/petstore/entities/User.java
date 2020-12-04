@@ -18,6 +18,7 @@ public class User {
     private String city;
     private String address;
     private String gender;
+    private String image;
     private List<FormAdopt> requestAdopt = new ArrayList<>();
 
     public void addFormAdopt(FormAdopt formAdopt){
@@ -79,6 +80,14 @@ public class User {
 
     public void setGender(String gender) { this.gender = gender; }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public List<FormAdopt> getRequestAdopt() {
         return requestAdopt;
     }
@@ -87,4 +96,18 @@ public class User {
         this.requestAdopt = requestAdopt;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone=" + phone +
+                ", age=" + age +
+                ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
+                ", gender=" + gender +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

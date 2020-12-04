@@ -13,6 +13,7 @@ public class Proveedor {
     private String companyName;
     private String city;
     private String address;
+    private String image;
 
     public String getEmail() {
         return email;
@@ -58,6 +59,14 @@ public class Proveedor {
 
     public void setAddress(String address) { this.address = address; }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Proveedor{" +
@@ -67,6 +76,7 @@ public class Proveedor {
                 ", companyName='" + companyName + '\'' +
                 ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }
